@@ -60,7 +60,7 @@ const PillarCard = ({
         className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xl shadow-foreground/5"
       >
         {/* Framed product screenshot — padded, bordered, no overlap */}
-        <div className="bg-muted/50 p-2 sm:p-3 sm:pb-0 p-3 pb-0">
+        <div className="bg-muted/50 p-2 sm:p-3">
           <div className="aspect-[16/9] overflow-hidden rounded-lg border border-border/60 bg-background">
             <img
               src={result.image}
