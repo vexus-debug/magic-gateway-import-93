@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import dashboardAsset from "@/assets/current-dashboard/dental-dashboard.png.asset.json";
 
 const dashboardScreenshot = dashboardAsset.url;
@@ -79,6 +80,11 @@ const HeroSection = () => {
                   Get Started <ArrowRight className="h-4 w-4" />
                 </Button>
               </a>
+              <Link to="/login">
+                <Button size="lg" variant="outline" className="gap-2 rounded-sm border-white/25 bg-transparent px-8 text-white hover:bg-white/10 hover:text-white">
+                  See Demo
+                </Button>
+              </Link>
             </div>
           </motion.div>
 
@@ -97,7 +103,7 @@ const HeroSection = () => {
                   transition={{ duration: 0.5, delay: 0.3 + i * 0.12 }}
                   className="flex items-baseline gap-5 py-5"
                 >
-                  <dt className="w-24 shrink-0 text-2xl text-white">{point.value}</dt>
+                  <dt className="w-32 shrink-0 text-xl text-white">{point.value}</dt>
                   <dd className="text-sm leading-relaxed text-white/50">{point.label}</dd>
                 </motion.div>
               ))}

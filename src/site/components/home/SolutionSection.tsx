@@ -141,7 +141,7 @@ const SolutionSection = () => {
             <p className="mb-8 max-w-md text-base leading-relaxed text-muted-foreground">
               A dental practice, an eye clinic, a diagnostic lab and a fertility centre work completely differently. Generic software forces your specialty's core clinical processes into text boxes, plugins and manual workarounds. Clinexus delivers a dedicated system built for the realities of your field.
             </p>
-            <Link to="/industries/eye-clinics/features">
+            <Link to="/industries">
               <Button className="gap-2 rounded-md bg-primary px-8 text-white shadow-md hover:opacity-90">
                 See How We Do It <ArrowRight className="h-4 w-4" />
               </Button>
