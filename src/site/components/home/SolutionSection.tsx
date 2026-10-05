@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Clock, TrendingUp, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -16,8 +16,7 @@ const results = [
     icon: Clock,
     label: "Pillar One",
     value: "Native Clinical Workflows",
-    sub: "Perio charting for dental. Refraction and lens orders for eye care. Real clinical tools, not blank notes",
-    color: "from-[hsl(var(--primary))] to-[hsl(var(--medical-teal))]",
+    sub: "Perio charting for dental. Refraction and lens orders for eye care. Real clinical tools, not blank notes.",
     image: appointmentsScreenshot,
     imageAlt: "Eye clinic appointments and patient schedule in Clinexus",
   },
@@ -25,8 +24,7 @@ const results = [
     icon: TrendingUp,
     label: "Pillar Two",
     value: "Specialty Operations",
-    sub: "Multi visit treatment billing, specialized lab tracking and optical inventory, handled the way your field handles them",
-    color: "from-[hsl(var(--primary))] to-[hsl(var(--primary))]/60",
+    sub: "Multi visit treatment billing, specialized lab tracking and optical inventory, handled the way your field handles them.",
     image: dashboardScreenshot,
     imageAlt: "Eye clinic dashboard showing revenue and performance in Clinexus",
   },
@@ -34,8 +32,7 @@ const results = [
     icon: ShieldCheck,
     label: "Pillar Three",
     value: "One Platform, Distinct Systems",
-    sub: "Every specialty gets its own dedicated system. No forced compromises",
-    color: "from-[hsl(var(--medical-teal))] to-[hsl(var(--primary))]",
+    sub: "Every specialty gets its own dedicated system. No forced compromises.",
     image: overviewScreenshot,
     imageAlt: "Clinexus eye clinic overview with role-specific operational information",
   },
@@ -49,46 +46,43 @@ const PillarCard = ({
   index: number;
 }) => {
   const reduceMotion = useReducedMotion();
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  // Image drifts inside its frame as the card scrolls through the viewport
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "end start"],
-  });
-  const imageY = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : -24, reduceMotion ? 0 : 24]);
 
   return (
     <div
-      ref={cardRef}
       className="sticky"
-      style={{ top: `${5.5 + index * 1.75}rem` }}
+      style={{ top: `${4 + index * 2.25}rem` }}
     >
       <motion.div
-        initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 48, rotate: 1 }}
-        whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6, delay: reduceMotion ? 0 : index * 0.08 }}
-        className="group w-full overflow-hidden rounded-3xl border border-border/50 bg-card shadow-2xl shadow-foreground/5"
+        initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.5, delay: reduceMotion ? 0 : index * 0.06 }}
+        className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-xl shadow-foreground/5"
       >
-        <div className="relative aspect-[16/7] overflow-hidden border-b border-border/50 bg-muted/50">
-          <motion.img
-            src={result.image}
-            alt={result.imageAlt}
-            loading="lazy"
-            style={{ y: imageY, scale: 1.12 }}
-            className="h-full w-full object-cover object-top"
-          />
+        {/* Framed product screenshot — padded, bordered, no overlap */}
+        <div className="bg-muted/50 p-2 sm:p-3 sm:pb-0 p-3 pb-0">
+          <div className="aspect-[16/9] overflow-hidden rounded-lg border border-border/60 bg-background">
+            <img
+              src={result.image}
+              alt={result.imageAlt}
+              loading="lazy"
+              className="h-full w-full object-cover object-top"
+            />
+          </div>
         </div>
         <div className="p-6">
-          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-muted/20">
-            <result.icon className="h-5 w-5 text-primary" />
+          <div className="mb-3 flex items-center gap-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+              <result.icon className="h-4 w-4 text-primary" />
+            </div>
+            <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+              {result.label}
+            </span>
           </div>
-          <div className="mb-1 text-sm text-muted-foreground">{result.label}</div>
-          <div className={`bg-gradient-to-r ${result.color} bg-clip-text text-2xl font-extrabold text-transparent`}>
-            {result.value}
-          </div>
-          <div className="mt-1 text-xs leading-relaxed text-muted-foreground">{result.sub}</div>
+          <h3 className="text-lg font-bold text-foreground">{result.value}</h3>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+            {result.sub}
+          </p>
         </div>
       </motion.div>
     </div>
@@ -96,32 +90,16 @@ const PillarCard = ({
 };
 
 const SolutionSection = () => {
-  const reduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const glowY = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : 80, reduceMotion ? 0 : -80]);
-
   return (
-    <section ref={sectionRef} className="relative site-section-light overflow-hidden py-24 md:py-32">
-      <div className="pointer-events-none absolute inset-0 bg-background" />
-      {/* Drifting glow accents */}
-      <motion.div
-        aria-hidden
-        style={{ y: glowY }}
-        className="pointer-events-none absolute -right-32 top-16 h-96 w-96 rounded-full bg-primary/10 blur-3xl"
-      />
-      <motion.div
-        aria-hidden
-        style={{ y: glowY }}
-        className="pointer-events-none absolute -left-24 bottom-24 h-72 w-72 rounded-full bg-[hsl(var(--medical-teal))]/10 blur-3xl"
-      />
-
+    <section
+      ref={sectionRef}
+      className="site-section-light relative overflow-hidden py-24 md:py-32"
+    >
       <div className="container relative z-10">
-        <div className="grid gap-16 lg:grid-cols-2">
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+          {/* Narrative column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -132,24 +110,26 @@ const SolutionSection = () => {
             <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-widest text-primary">
               The Problem We Solve
             </span>
-            <h2 className="mb-5 text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
-              When Healthcare Software Is Built for Everyone,{" "}
-              <span className="text-muted-foreground">
-                It Works for No One
-              </span>
+            <h2 className="mb-5 max-w-lg text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
+              When Healthcare Software Is Built for Everyone, It Works for No
+              One
             </h2>
-            <p className="mb-8 max-w-md text-base leading-relaxed text-muted-foreground">
-              A dental practice, an eye clinic, a diagnostic lab and a fertility centre work completely differently. Generic software forces your specialty's core clinical processes into text boxes, plugins and manual workarounds. Clinexus delivers a dedicated system built for the realities of your field.
+            <p className="mb-8 max-w-lg text-base leading-relaxed text-muted-foreground">
+              A dental practice, an eye clinic, a diagnostic lab and a fertility
+              centre work completely differently. Generic software forces your
+              specialty's core clinical processes into text boxes, plugins and
+              manual workarounds. Clinexus delivers a dedicated system built for
+              the realities of your field.
             </p>
             <Link to="/industries">
-              <Button className="gap-2 rounded-md bg-primary px-8 text-white shadow-md hover:opacity-90">
+              <Button className="gap-2 rounded-lg bg-primary px-8 text-primary-foreground shadow-md hover:opacity-90">
                 See How We Do It <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </motion.div>
 
-          {/* Sticky-stacking pillar cards */}
-          <div className="relative flex flex-col gap-6 pb-8">
+          {/* Stacking pillar cards */}
+          <div className="relative flex flex-col gap-10 pb-8">
             {results.map((result, i) => (
               <PillarCard key={result.label} result={result} index={i} />
             ))}
