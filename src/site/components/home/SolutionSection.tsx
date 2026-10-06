@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import {
   HiSignal,
   HiUsers,
@@ -197,33 +197,65 @@ const SolutionSection = () => {
 
   return (
     <section className="site-section-light relative overflow-hidden py-20 md:py-28">
-      <div className="container relative z-10 flex w-full flex-col items-center">
-        <motion.span
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-4 inline-block text-sm font-semibold uppercase tracking-widest text-primary"
-        >
-          The Problem We Solve
-        </motion.span>
-        <motion.h2
-          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-foreground max-w-2xl text-center text-3xl font-semibold tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]"
-        >
-          When Healthcare Software Is Built for Everyone, It Works for No One
-        </motion.h2>
+      <div className="container relative z-10 flex w-full flex-col">
+        <div className="max-w-2xl">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-4 flex items-center gap-3"
+          >
+            <span className="h-[2px] w-8 bg-primary" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+              The Problem We Solve
+            </span>
+          </motion.div>
+          <motion.h2
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-foreground text-3xl font-extrabold tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.12]"
+          >
+            When Healthcare Software Is Built{" "}
+            <span className="text-foreground/40">
+              for Everyone, It Works for{" "}
+            </span>
+            No One
+          </motion.h2>
 
-        <p className="text-muted-foreground mt-4 max-w-2xl text-center text-base leading-relaxed">
-          A dental practice, an eye clinic, a diagnostic lab and a fertility
-          centre work completely differently. Generic software forces your
-          specialty's core clinical processes into text boxes, plugins and
-          manual workarounds. Clinexus delivers a dedicated system built for
-          the realities of your field.
-        </p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="relative mt-8 pl-6"
+          >
+            <span className="bg-border absolute left-0 top-0 h-full w-px" />
+            <p className="text-lg font-medium leading-relaxed text-foreground md:text-xl">
+              A dental practice, an eye clinic, a diagnostic lab and a fertility
+              centre work completely differently.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-[15px]">
+              Generic software forces your specialty's core clinical processes
+              into text boxes, plugins and manual workarounds. Clinexus
+              delivers a dedicated system built for the realities of your
+              field.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mt-8 flex items-center gap-2 text-xs font-semibold text-primary"
+          >
+            <span>Explore our specialized solutions</span>
+            <ChevronDown className="h-4 w-4" />
+          </motion.div>
+        </div>
 
         <div className="-mx-6 mt-12 flex w-[calc(100%+3rem)] snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:w-full md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden">
           {pillars.map((pillar, i) => (
