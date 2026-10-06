@@ -181,7 +181,7 @@ const PillarCard = ({ pillar, index }: { pillar: (typeof pillars)[number]; index
         <CardContent className="flex h-full flex-col gap-8 p-4">
           <div className="text-center">
             <h3 className="text-foreground text-2xl font-semibold">{pillar.title}</h3>
-            <p className="text-muted-foreground mt-1.5 text-sm/6 leading-relaxed">
+            <p className="text-muted-foreground mt-1.5 text-sm/6">
               {pillar.sub}
             </p>
           </div>
@@ -193,6 +193,8 @@ const PillarCard = ({ pillar, index }: { pillar: (typeof pillars)[number]; index
 };
 
 const SolutionSection = () => {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section className="site-section-light relative overflow-hidden py-20 md:py-28">
       <div className="container relative z-10 flex w-full flex-col items-center">
