@@ -175,7 +175,7 @@ const PillarCard = ({ pillar, index }: { pillar: (typeof pillars)[number]; index
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: reduceMotion ? 0 : index * 0.06 }}
-      className="h-full"
+      className="h-full w-[86%] flex-none snap-center md:w-auto"
     >
       <Card className="bg-muted/40 flex h-full flex-col rounded-[40px] p-0 border-border/60">
         <CardContent className="flex h-full flex-col gap-8 p-4">
@@ -225,7 +225,7 @@ const SolutionSection = () => {
           the realities of your field.
         </p>
 
-        <div className="mt-12 grid w-full max-w-6xl items-stretch gap-6 md:grid-cols-3">
+        <div className="-mx-6 mt-12 flex w-[calc(100%+3rem)] snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:w-full md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden">
           {pillars.map((pillar, i) => (
             <PillarCard key={pillar.title} pillar={pillar} index={i} />
           ))}
