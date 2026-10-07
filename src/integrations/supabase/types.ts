@@ -1958,6 +1958,53 @@ export type Database = {
           },
         ]
       }
+      lab_records: {
+        Row: {
+          amount: number
+          created_at: string
+          data: Json
+          id: string
+          kind: string
+          org_id: string
+          record_date: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          data?: Json
+          id?: string
+          kind: string
+          org_id: string
+          record_date?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          data?: Json
+          id?: string
+          kind?: string
+          org_id?: string
+          record_date?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lab_records_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lab_serial_counters: {
         Row: {
           kind: string
@@ -5817,6 +5864,7 @@ export type Database = {
         | "cardiology"
         | "ent"
         | "diagnostic"
+        | "dental_lab"
       org_role:
         | "owner"
         | "admin"
@@ -5968,6 +6016,7 @@ export const Constants = {
         "cardiology",
         "ent",
         "diagnostic",
+        "dental_lab",
       ],
       org_role: [
         "owner",
